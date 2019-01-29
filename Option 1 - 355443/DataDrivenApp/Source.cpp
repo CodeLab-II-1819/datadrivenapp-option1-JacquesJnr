@@ -5,14 +5,18 @@
 using namespace std;
 
 string myData;
+string SearchData;
 string search;
 ifstream inFile;
 size_t pos; // Size_t reffers to unassigned integer type of the result of the function "sizeof" in this case size_t represents the size of sampleTweets.csv
-// Testing branches
+size_t keyword;
+
+bool submenu;
 
 int linecount = 0;
 int userinput = 0;
-int secondinput = 0;
+
+vector<string> searchwords = { "congress", "abortion", "president", "immigration", "election" };
 
 void MainMenu() {
 	// This function displays the main menu
@@ -26,16 +30,14 @@ void MainMenu() {
 		"(1): Tweets Mentioning Uber",
 		"(2): Tweets Mentioning Dreamworks",
 		"(3): Tweets Mentioning Paris",
-		"(4): How many Tweets mention Money",
-		"(5): How many Tweets mention Politics",
-		"(6): How many Tweets mention Food",
-		"(7): Tweets Mentioning Donald Trump",
-		"(8): Tweets Mentioning Katy Perry",
-		"(9): Tweets Mentioning Justin Bieber",
-		"(10) Show retweets",
-		"(11): Free Search Tweets",
-		"(12): Total Number of tweets",
-		"(13): Exit Program"};
+		"(4): How many tweets mention...",
+		"(5): Tweets Mentioning Donald Trump",
+		"(6): Tweets Mentioning Katy Perry",
+		"(7): Tweets Mentioning Justin Bieber",
+		"(8) Show retweets",
+		"(9): Free Search Tweets",
+		"(10): Total Number of tweets",
+		"(11): Exit Program"};
 		
 
 	for (int i = 0; i < options.size(); i++) { // Prints the vector to console
@@ -45,10 +47,36 @@ void MainMenu() {
 		
 }
 
-void GetTweets() {
-	
-	while (getline(inFile, myData)) {
-		linecount++;
+void SubMenu() {
+	int count = 0;
+
+	cout << "Select an option to see how many tweets mention it" << endl;
+	cout << endl;
+	vector<string> suboptions = {
+		"(1): Money",
+		"(2): Politics",
+		"(3): Food"
+	};
+
+	for (int i = 0; i < suboptions.size(); i++) {
+		cout << suboptions[i] << endl;
+	}
+
+	cout << "Enter a number: " << endl;
+	cin >> userinput;
+
+	if (submenu = true && userinput == 1) // Trying to do a keyword search depending on user input
+	{
+		while (inFile.good()) { 
+			getline(inFile, myData);
+			keyword = myData.find(search);
+			if (pos != string::npos) {
+				cout << myData << endl;
+				cout << endl;
+				cout << "-------------------------------------------------------------------------------------------------------" << endl;
+				cout << endl;
+			}
+		}
 	}
 }
 
@@ -70,6 +98,7 @@ void ShowText() {
 int main() {
 
 	inFile.open("sampleTweets.csv"); //Open sampleTweets.csv
+	submenu = false;
 
 	if (!inFile) { // If the file isn't open print message
 		cout << "Unable to open file" << endl;
@@ -97,31 +126,29 @@ int main() {
 			search = "Paris";
 			break;
 		case 4:
+			SubMenu();
+			submenu = true;
 			break;
 		case 5:
-			break;
-		case 6:
-			break;
-		case 7:
 			cout << "Searching for tweets involving Donald Trump: " << endl;
 			search = "Donald Trump";
 			break;
-		case 8:
+		case 6:
 			cout << "Searching for tweets involving Katy Perry: " << endl;
 			search = "Katy Perry";
 			break;
-		case 9:
+		case 7:
 			cout << "Searching for tweets involving Justin Bieber: " << endl;
 			search = "Justin Bieber";
 			break;
-		case 10:
+		case 8:
 			//Find a way to separate RT from tweets
-		case 11:
+		case 9:
 			system("CLS");
 			cout << "Insert a term to search: " << endl;
 			cin >> search;
 			break;
-		case 12:
+		case 10:
 			while (getline(inFile, myData)) {
 				linecount++;
 			}
@@ -129,17 +156,20 @@ int main() {
 			cout << "The total number of tweets is: " << linecount << endl;
 			cout << endl;
 			break;
-		case 13:
+		case 11:
 			return 0;
 			break;
 		default:
 			cout << "Invalid number" << endl;
 		}
 	
-		ShowText();
+		if(submenu = false)
+		{
+			ShowText();
+		}
 		inFile.open("sampleTweets.csv");
 		
-	} while (userinput !=13);
+	} while (userinput !=11);
 
 	system("pause");
 }
@@ -147,22 +177,7 @@ int main() {
 /*
 CODE DUMP
 
-void SubMenu() {
-	int count;
 
-	cout << "Select an option to see how many tweets mention it" << endl;
-	cout << endl;
-	vector<string> suboptions = {
-		"(1): Money",
-		"(2): Politics",
-		"(3): Food"
-	};
-
-	for (int i = 0; i < suboptions.size(); i++) {
-		cout << suboptions[i] << endl;
-	}
-
-	cout << "Enter a number: " << endl;
 }
 
 */
