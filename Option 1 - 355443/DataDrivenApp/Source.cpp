@@ -36,7 +36,7 @@ void MainMenu() {
 		"(5): Tweets Mentioning Donald Trump",
 		"(6): Tweets Mentioning Katy Perry",
 		"(7): Tweets Mentioning Justin Bieber",
-		"(8) Show retweets",
+		"(8): Show retweets",
 		"(9): Free Search Tweets",
 		"(10): Total Number of tweets",
 		"(11): Exit Program"};
@@ -44,6 +44,7 @@ void MainMenu() {
 
 	for (int i = 0; i < options.size(); i++) { // Prints the vector to console
 		cout << options[i] << endl;
+		cout << "-------------------------------------" << endl;
 	}
 	cout << endl;
 		
@@ -62,6 +63,7 @@ void SubMenu() { // This function displays the sub-menu and takes in a users inp
 
 	for (int i = 0; i < suboptions.size(); i++) {
 		cout << suboptions[i] << endl;
+		cout << "----------------" << endl;
 	}
 
 	cout << "Enter a number: " << endl;
@@ -84,7 +86,7 @@ void Money() { // This function counts the number of tweets that mention money b
 			counter++;
 		}
 	}
-
+	inFile.close();
 	cout << "The number of tweets that mention money is: " << counter << endl;
 	cout << endl;
 }
@@ -110,7 +112,7 @@ void Politics() { // This function counts the number of tweets that mention poli
 			counter++;
 		}
 	}
-
+	inFile.close();
 	cout << "The number of tweets that mention politics is: " << counter << endl;
 	cout << endl;
 }
@@ -133,9 +135,13 @@ void Food() { // This function counts the number of tweets that mention food bas
 			counter++;
 		}
 	}
-
+	inFile.close();
 	cout << "The number of tweets that mention food is: " << counter << endl;
 	cout << endl;
+}
+
+void RandomTweet() {
+
 }
 
 void ShowText() { // This function is used to print the queried tweets to console
@@ -198,6 +204,9 @@ int main() {
 			}
 			if (userinput == 3 && submenu) {
 				Food();
+			}
+			if (userinput >= 4) {
+				cout << "Invalid input..try again" << endl;
 			}
 			break;
 		case 5:
