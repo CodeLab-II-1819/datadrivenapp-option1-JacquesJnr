@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
+
 using namespace std;
 
 string myData;
@@ -18,6 +19,7 @@ int userinput = 0;
 vector<string> money = { "$", "cash", "money", "Cash", "Money" }; // Keywords I use to identigy if a tweet mentions money
 vector<string> politics = { "congress","Congress","abortion","Abortion","president","President","immigration","Immigration", "election", "Election" }; // Keywords I use to identigy if a tweet mentions politics
 vector<string> food = {"food","Food", "yum","Yum", "#FoodFriday", "cook", "Cook"}; // Keywords I use to identigy if a tweet mentions food
+vector<string> vulgar = { "fuck", "Fuck", "phuck", "FUCK", "shit", "Shit", "SHIT", "bitch", "Bitch", "BITCH" ,"bitchez", "Bitchez" }; // Don't ask
 
 
 void MainMenu() {
@@ -36,10 +38,9 @@ void MainMenu() {
 		"(5): Tweets Mentioning Donald Trump",
 		"(6): Tweets Mentioning Katy Perry",
 		"(7): Tweets Mentioning Justin Bieber",
-		"(8): Show retweets",
-		"(9): Free Search Tweets",
-		"(10): Total Number of tweets",
-		"(11): Exit Program"};
+		"(8): Free Search Tweets",
+		"(9): Total Number of tweets",
+		"(10): Exit Program"};
 		
 
 	for (int i = 0; i < options.size(); i++) { // Prints the vector to console
@@ -58,7 +59,8 @@ void SubMenu() { // This function displays the sub-menu and takes in a users inp
 	vector<string> suboptions = {
 		"(1): Money",
 		"(2): Politics",
-		"(3): Food"
+		"(3): Food",
+		"(4): Swear Words"
 	};
 
 	for (int i = 0; i < suboptions.size(); i++) {
@@ -140,8 +142,51 @@ void Food() { // This function counts the number of tweets that mention food bas
 	cout << endl;
 }
 
-void RandomTweet() {
+void ColourfulLanguage() { // This function counts the number of tweets that have swear words in them, I had to manually look for these keywords in the sampleTweets file
+	int counter = 0;
 
+	while (!inFile.eof()) {
+		getline(inFile, SearchData);
+		if (SearchData.find(vulgar[0]) != SearchData.npos) {
+			counter++;
+		}
+		if (SearchData.find(vulgar[1]) != SearchData.npos) {
+			counter++;
+		}
+		if (SearchData.find(vulgar[2]) != SearchData.npos) {
+			counter++;
+		}
+		if (SearchData.find(vulgar[3]) != SearchData.npos) {
+			counter++;
+		}
+		if (SearchData.find(vulgar[4]) != SearchData.npos) {
+			counter++;
+		}
+		if (SearchData.find(vulgar[5]) != SearchData.npos) {
+			counter++;
+		}
+		if (SearchData.find(vulgar[6]) != SearchData.npos) {
+			counter++;
+		}
+		if (SearchData.find(vulgar[7]) != SearchData.npos) {
+			counter++;
+		}
+		if (SearchData.find(vulgar[8]) != SearchData.npos) {
+			counter++;
+		}
+		if (SearchData.find(vulgar[9]) != SearchData.npos) {
+			counter++;
+		}
+		if (SearchData.find(vulgar[10]) != SearchData.npos) {
+			counter++;
+		}
+		if (SearchData.find(vulgar[11]) != SearchData.npos) {
+			counter++;
+		}
+	}
+	inFile.close();
+	cout << "The number of tweets that have colourful language is: " << counter << endl;
+	cout << endl;
 }
 
 void ShowText() { // This function is used to print the queried tweets to console
@@ -205,7 +250,10 @@ int main() {
 			if (userinput == 3 && submenu) {
 				Food();
 			}
-			if (userinput >= 4) {
+			if (userinput == 4 && submenu) {
+				ColourfulLanguage();
+			}
+			if (userinput >= 5) {
 				cout << "Invalid input..try again" << endl;
 			}
 			break;
@@ -225,14 +273,12 @@ int main() {
 			ShowText();
 			break;
 		case 8:
-			//Find a way to separate RT from tweets
-		case 9:
 			system("CLS");
 			cout << "Insert a term to search: " << endl;
 			cin >> search;
 			ShowText();
 			break;
-		case 10:
+		case 9:
 			while (getline(inFile, myData)) {
 				linecount++;
 			}
@@ -240,7 +286,7 @@ int main() {
 			cout << "The total number of tweets is: " << linecount << endl;
 			cout << endl;
 			break;
-		case 11:
+		case 10:
 			return 0;
 			break;
 		default:
@@ -249,7 +295,7 @@ int main() {
 
 		inFile.open("sampleTweets.csv");
 		
-	} while (userinput !=11);
+	} while (userinput !=10);
 
 	system("pause");
 }
