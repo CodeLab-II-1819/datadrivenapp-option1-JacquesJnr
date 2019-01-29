@@ -8,6 +8,7 @@ using namespace std;
 string myData;
 string SearchData;
 string search;
+string date;
 ifstream inFile;
 size_t pos; // Size_t reffers to unassigned integer type of the result of the function "sizeof" in this case size_t represents the size of sampleTweets.csv
 
@@ -40,7 +41,8 @@ void MainMenu() {
 		"(7): Tweets Mentioning Justin Bieber",
 		"(8): Free Search Tweets",
 		"(9): Total Number of tweets",
-		"(10): Exit Program"};
+		"(10): Show tweets by year",
+		"(11): Exit Program"};
 		
 
 	for (int i = 0; i < options.size(); i++) { // Prints the vector to console
@@ -189,6 +191,21 @@ void ColourfulLanguage() { // This function counts the number of tweets that hav
 	cout << endl;
 }
 
+void SearchDate() {
+	while (inFile.good()) { 
+		getline(inFile, SearchData); 
+		pos = SearchData.find("/" + date); // Appends "/" to the users dat so it can be found in the sampleTweets
+		if (pos != string::npos) { 
+			cout << SearchData << endl;
+			cout << endl;
+			cout << "-------------------------------------------------------------------------------------------------------" << endl;
+			cout << endl;
+		}
+	}
+
+	inFile.close();
+}
+
 void ShowText() { // This function is used to print the queried tweets to console
 
 	while (inFile.good()) { // If the file is open
@@ -219,6 +236,10 @@ int main() {
 		MainMenu();
 		cout << "Enter a number: " << endl;
 		cin >> userinput;
+		if (cin.fail()) {
+			cout << "Invalid Input ..." << endl;
+			break;
+		}
 
 		switch (userinput) // This switch statement controls the menu in the MainMenu() function
 		{
@@ -268,6 +289,7 @@ int main() {
 			ShowText();
 			break;
 		case 7:
+			system("CLS");
 			cout << "Searching for tweets involving Justin Bieber: " << endl;
 			search = "Justin Bieber";
 			ShowText();
@@ -279,14 +301,22 @@ int main() {
 			ShowText();
 			break;
 		case 9:
+			cout << "Please wait ..." << endl;
 			while (getline(inFile, myData)) {
 				linecount++;
 			}
 			system("CLS");
+			cout << "Please wait ..." << endl;
 			cout << "The total number of tweets is: " << linecount << endl;
 			cout << endl;
 			break;
 		case 10:
+			system("CLS");
+			cout << "Enter a year to search by (2011 - 2017): " << endl;
+			cin >> date;
+			SearchDate();
+			break;
+		case 11:
 			return 0;
 			break;
 		default:
@@ -295,7 +325,7 @@ int main() {
 
 		inFile.open("sampleTweets.csv");
 		
-	} while (userinput !=10);
+	} while (userinput !=11);
 
 	system("pause");
 }
