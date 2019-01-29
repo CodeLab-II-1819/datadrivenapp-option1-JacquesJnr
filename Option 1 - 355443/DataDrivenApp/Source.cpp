@@ -9,14 +9,16 @@ string SearchData;
 string search;
 ifstream inFile;
 size_t pos; // Size_t reffers to unassigned integer type of the result of the function "sizeof" in this case size_t represents the size of sampleTweets.csv
-size_t keyword;
 
-bool submenu;
+bool submenu; // A boolean to check if the sub-menu is open
 
 int linecount = 0;
 int userinput = 0;
 
-vector<string> searchwords = { "congress", "abortion", "president", "immigration", "election" };
+vector<string> money = { "$", "cash", "money" }; // Keywords I use to identigy if a tweet mentions money
+vector<string> politics = { "congress", "abortion", "president", "immigration", "election" }; // Keywords I use to identigy if a tweet mentions politics
+vector<string> food = {"food", "yum", "#FoodFriday", "cook"}; // Keywords I use to identigy if a tweet mentions food
+
 
 void MainMenu() {
 	// This function displays the main menu
@@ -47,8 +49,8 @@ void MainMenu() {
 		
 }
 
-void SubMenu() {
-	int count = 0;
+void SubMenu() { // This function displays the sub-menu and takes in a users input
+	
 
 	cout << "Select an option to see how many tweets mention it" << endl;
 	cout << endl;
@@ -64,23 +66,79 @@ void SubMenu() {
 
 	cout << "Enter a number: " << endl;
 	cin >> userinput;
-
-	if (submenu = true && userinput == 1) // Trying to do a keyword search depending on user input
-	{
-		while (inFile.good()) { 
-			getline(inFile, myData);
-			keyword = myData.find(search);
-			if (pos != string::npos) {
-				cout << myData << endl;
-				cout << endl;
-				cout << "-------------------------------------------------------------------------------------------------------" << endl;
-				cout << endl;
-			}
-		}
-	}
+	cout << endl;
 }
 
-void ShowText() {
+void Money() { // This function counts the number of tweets that mention money based off the keywords vector
+	int counter = 0;
+
+	while (!inFile.eof()) {
+		getline(inFile, SearchData); 
+		if (SearchData.find(money[0]) != SearchData.npos) {
+			counter++;
+		}
+		if (SearchData.find(money[1]) != SearchData.npos) {
+			counter++;
+		}
+		if (SearchData.find(money[2]) != SearchData.npos) {
+			counter++;
+		}
+	}
+
+	cout << "The number of tweets that mention money is: " << counter << endl;
+	cout << endl;
+}
+
+void Politics() { // This function counts the number of tweets that mention politics based off the keywords vector
+	int counter = 0;
+
+	while (!inFile.eof()) {
+		getline(inFile, SearchData); 
+		if (SearchData.find(politics[0]) != SearchData.npos) {
+			counter++;
+		}
+		if (SearchData.find(politics[1]) != SearchData.npos) {
+			counter++;
+		}
+		if (SearchData.find(politics[2]) != SearchData.npos) {
+			counter++;
+		}
+		if (SearchData.find(politics[3]) != SearchData.npos) {
+			counter++;
+		}
+		if (SearchData.find(politics[4]) != SearchData.npos) {
+			counter++;
+		}
+	}
+
+	cout << "The number of tweets that mention politics is: " << counter << endl;
+	cout << endl;
+}
+
+void Food() { // This function counts the number of tweets that mention food based off the keywords vector
+	int counter = 0;
+
+	while (!inFile.eof()) { 
+		getline(inFile, SearchData); 
+		if (SearchData.find(food[0]) != SearchData.npos) {
+			counter++;
+		}
+		if (SearchData.find(food[1]) != SearchData.npos) {
+			counter++;
+		}
+		if (SearchData.find(food[2]) != SearchData.npos) {
+			counter++;
+		}
+		if (SearchData.find(food[3]) != SearchData.npos) {
+			counter++;
+		}
+	}
+
+	cout << "The number of tweets that mention food is: " << counter << endl;
+	cout << endl;
+}
+
+void ShowText() { // This function is used to print the queried tweets to console
 
 	while (inFile.good()) { // If the file is open
 		getline(inFile, myData); // Get all lines as the string variable myData
@@ -98,7 +156,7 @@ void ShowText() {
 int main() {
 
 	inFile.open("sampleTweets.csv"); //Open sampleTweets.csv
-	submenu = false;
+	submenu = false; // By default the sub-menu isn't open
 
 	if (!inFile) { // If the file isn't open print message
 		cout << "Unable to open file" << endl;
@@ -116,30 +174,46 @@ int main() {
 		case 1:
 			cout << "Searching for tweets involving Uber: " << endl;
 			search = "Uber";
+			ShowText();
 			break;
 		case 2:
 			cout << "Searching for tweets involving Dreamworks: " << endl;
 			search = "Dreamworks";
+			ShowText();
 			break;
 		case 3:
 			cout << "Searching for tweets involving Paris: " << endl;
 			search = "Paris";
+			ShowText();
 			break;
 		case 4:
-			SubMenu();
+			system("CLS"); // Clear the console
 			submenu = true;
+			SubMenu();
+			if (userinput == 1 && submenu) { // These if statments check the user's input for the sub-menu and executes the respective function so long as the submenu is active
+				Money();
+			}
+			if (userinput == 2 && submenu) {
+				Politics();
+			}
+			if (userinput == 3 && submenu) {
+				Food();
+			}
 			break;
 		case 5:
 			cout << "Searching for tweets involving Donald Trump: " << endl;
 			search = "Donald Trump";
+			ShowText();
 			break;
 		case 6:
 			cout << "Searching for tweets involving Katy Perry: " << endl;
 			search = "Katy Perry";
+			ShowText();
 			break;
 		case 7:
 			cout << "Searching for tweets involving Justin Bieber: " << endl;
 			search = "Justin Bieber";
+			ShowText();
 			break;
 		case 8:
 			//Find a way to separate RT from tweets
@@ -147,6 +221,7 @@ int main() {
 			system("CLS");
 			cout << "Insert a term to search: " << endl;
 			cin >> search;
+			ShowText();
 			break;
 		case 10:
 			while (getline(inFile, myData)) {
@@ -162,22 +237,10 @@ int main() {
 		default:
 			cout << "Invalid number" << endl;
 		}
-	
-		if(submenu = false)
-		{
-			ShowText();
-		}
+
 		inFile.open("sampleTweets.csv");
 		
 	} while (userinput !=11);
 
 	system("pause");
 }
-
-/*
-CODE DUMP
-
-
-}
-
-*/
