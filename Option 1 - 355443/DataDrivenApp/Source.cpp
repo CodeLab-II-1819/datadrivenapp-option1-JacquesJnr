@@ -15,9 +15,9 @@ bool submenu; // A boolean to check if the sub-menu is open
 int linecount = 0;
 int userinput = 0;
 
-vector<string> money = { "$", "cash", "money" }; // Keywords I use to identigy if a tweet mentions money
-vector<string> politics = { "congress", "abortion", "president", "immigration", "election" }; // Keywords I use to identigy if a tweet mentions politics
-vector<string> food = {"food", "yum", "#FoodFriday", "cook"}; // Keywords I use to identigy if a tweet mentions food
+vector<string> money = { "$", "cash", "money", "Cash", "Money" }; // Keywords I use to identigy if a tweet mentions money
+vector<string> politics = { "congress","Congress","abortion","Abortion","president","President","immigration","Immigration", "election", "Election" }; // Keywords I use to identigy if a tweet mentions politics
+vector<string> food = {"food","Food", "yum","Yum", "#FoodFriday", "cook", "Cook"}; // Keywords I use to identigy if a tweet mentions food
 
 
 void MainMenu() {
