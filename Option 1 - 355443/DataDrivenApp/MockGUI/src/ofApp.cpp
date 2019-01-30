@@ -2,6 +2,8 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+
+	image.load("bird.png");
 	TextMain.load("Avenir.otf", 30);
 	TextMenu.load("Avenir.otf", 9);
 	TextBody.load("Avenir.otf", 16);
@@ -46,6 +48,9 @@ void ofApp::draw(){
 	// Grey Panel
 	ofSetColor(229);
 	ofDrawRectangle(0, 101, 349, 668);
+
+	//Image
+	image.draw(ofGetWidth() / 2 - 230, ofGetHeight() / 2 - 380, 60, 60);
 
 	//Tick Boxes
 	ofSetColor(0);

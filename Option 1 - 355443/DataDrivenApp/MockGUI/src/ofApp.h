@@ -9,6 +9,7 @@ class ofApp : public ofBaseApp{
 		void update();
 		void draw();
 
+		ofImage image;
 		ofTrueTypeFont TextMain;
 		ofTrueTypeFont TextMenu;
 		ofTrueTypeFont TextBody;
