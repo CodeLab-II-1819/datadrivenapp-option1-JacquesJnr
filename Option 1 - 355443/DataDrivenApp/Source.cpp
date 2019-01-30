@@ -20,7 +20,7 @@ int userinput = 0;
 vector<string> money = { "$", "cash", "money", "Cash", "Money" }; // Keywords I use to identigy if a tweet mentions money
 vector<string> politics = { "congress","Congress","abortion","Abortion","president","President","immigration","Immigration", "election", "Election" }; // Keywords I use to identigy if a tweet mentions politics
 vector<string> food = {"food","Food", "yum","Yum", "#FoodFriday", "cook", "Cook"}; // Keywords I use to identigy if a tweet mentions food
-vector<string> vulgar = { "fuck", "Fuck", "phuck", "FUCK", "shit", "Shit", "SHIT", "bitch", "Bitch", "BITCH" ,"bitchez", "Bitchez" }; // Don't ask
+vector<string> vulgar = { "fuck", "Fuck", "phuck", "FUCK", "shit", "Shit", "SHIT", "bitch", "Bitch", "BITCH" ,"bitchez", "Bitchez" }; // Swear words people used from 2011 - 2017, not including racial slurs
 
 
 void MainMenu() {
@@ -71,7 +71,7 @@ void SubMenu() { // This function displays the sub-menu and takes in a users inp
 	}
 
 	cout << "Enter a number: " << endl;
-	cin >> userinput;
+	cin >> userinput; // The user input will determin the function that will be called either Money, Politics, Food or ColourfulLanguage
 	cout << endl;
 }
 
@@ -89,9 +89,15 @@ void Money() { // This function counts the number of tweets that mention money b
 		if (SearchData.find(money[2]) != SearchData.npos) {
 			counter++;
 		}
+		if (SearchData.find(money[3]) != SearchData.npos) {
+			counter++;
+		}
+		if (SearchData.find(money[4]) != SearchData.npos) {
+			counter++;
+		}
 	}
 	inFile.close();
-	cout << "The number of tweets that mention money is: " << counter << endl;
+	cout << "The number of tweets that mention money is: " << counter << ", based off search terms " <<  money[0] + ", " + money[1] + ", " + money[2] + ", " + money[3] + ", " + money[4] << endl;
 	cout << endl;
 }
 
@@ -115,9 +121,24 @@ void Politics() { // This function counts the number of tweets that mention poli
 		if (SearchData.find(politics[4]) != SearchData.npos) {
 			counter++;
 		}
+		if (SearchData.find(politics[5]) != SearchData.npos) {
+			counter++;
+		}
+		if (SearchData.find(politics[6]) != SearchData.npos) {
+			counter++;
+		}
+		if (SearchData.find(politics[7]) != SearchData.npos) {
+			counter++;
+		}
+		if (SearchData.find(politics[8]) != SearchData.npos) {
+			counter++;
+		}
+		if (SearchData.find(politics[9]) != SearchData.npos) {
+			counter++;
+		}
 	}
 	inFile.close();
-	cout << "The number of tweets that mention politics is: " << counter << endl;
+	cout << "The number of tweets that mention politics is: " << counter << ", based off search terms " << politics[0] + ", " + politics[1] + ", " + politics[2] + ", " + politics[3] + ", " + politics[4] + ", " + politics[5] + ", " + politics[6] + ", " + politics[7] + ", " + politics[8] + ", " + politics[9] << endl;
 	cout << endl;
 }
 
@@ -138,9 +159,18 @@ void Food() { // This function counts the number of tweets that mention food bas
 		if (SearchData.find(food[3]) != SearchData.npos) {
 			counter++;
 		}
+		if (SearchData.find(food[4]) != SearchData.npos) {
+			counter++;
+		}
+		if (SearchData.find(food[5]) != SearchData.npos) {
+			counter++;
+		}
+		if (SearchData.find(food[6]) != SearchData.npos) {
+			counter++;
+		}
 	}
 	inFile.close();
-	cout << "The number of tweets that mention food is: " << counter << endl;
+	cout << "The number of tweets that mention food is: " << counter << ", based off search terms " << food[0] + ", " + food[1] + ", " + food[2] + ", " + food[3] + ", " + food[4] + ", " + food[5] + ", " + food[6] << endl;
 	cout << endl;
 }
 
@@ -194,7 +224,7 @@ void ColourfulLanguage() { // This function counts the number of tweets that hav
 void SearchDate() {
 	while (inFile.good()) { 
 		getline(inFile, SearchData); 
-		pos = SearchData.find("/" + date); // Appends "/" to the users dat so it can be found in the sampleTweets
+		pos = SearchData.find("/" + date); // Appends "/" to the users input so it can be found in the sampleTweets because the dates are formatted dd/mm/yyyy
 		if (pos != string::npos) { 
 			cout << SearchData << endl;
 			cout << endl;
@@ -312,12 +342,12 @@ int main() {
 			break;
 		case 10:
 			system("CLS");
-			cout << "Enter a year to search by (2011 - 2017): " << endl;
+			cout << "Enter a year to search by (2010 - 2017): " << endl;
 			cin >> date;
 			SearchDate();
 			break;
 		case 11:
-			return 0;
+			return 0; // Ends the program
 			break;
 		default:
 			cout << "Invalid number" << endl;
