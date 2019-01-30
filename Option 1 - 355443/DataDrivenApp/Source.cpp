@@ -20,8 +20,7 @@ int userinput = 0;
 vector<string> money = { "$", "cash", "money", "Cash", "Money" }; // Keywords I use to identigy if a tweet mentions money
 vector<string> politics = { "congress","Congress","abortion","Abortion","president","President","immigration","Immigration", "election", "Election" }; // Keywords I use to identigy if a tweet mentions politics
 vector<string> food = {"food","Food", "yum","Yum", "#FoodFriday", "cook", "Cook"}; // Keywords I use to identigy if a tweet mentions food
-vector<string> vulgar = { "fuck", "Fuck", "phuck", "FUCK", "shit", "Shit", "SHIT", "bitch", "Bitch", "BITCH" ,"bitchez", "Bitchez" }; // Swear words people used from 2011 - 2017, not including racial slurs
-
+vector<string> vulgar = { "fuck", "Fuck", "phuck", "FUCK", "shit", "Shit", "SHIT", "bitch", "Bitch", "BITCH" ,"bitchez", "Bitchez" }; // Swear words 
 
 void MainMenu() {
 	// This function displays the main menu
