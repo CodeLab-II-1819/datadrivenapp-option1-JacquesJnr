@@ -5,10 +5,10 @@
 
 using namespace std;
 
-string myData;
-string SearchData;
-string search;
-string date;
+string myData; // The string sampleTweets.csv will be read as
+string SearchData; // The string I use for counting tweets
+string search; // The search term to look for in the sample tweets
+string date; // The string to look-up a date
 ifstream inFile;
 size_t pos; // Size_t reffers to unassigned integer type of the result of the function "sizeof" in this case size_t represents the size of sampleTweets.csv
 
@@ -17,7 +17,7 @@ bool submenu; // A boolean to check if the sub-menu is open
 int linecount = 0;
 int userinput = 0;
 
-vector<string> money = { "$", "cash", "money", "Cash", "Money" }; // Keywords I use to identigy if a tweet mentions money
+vector<string> money = { "$", "cash", "money", "Cash", "Money" }; // Keywords I use to identify if a tweet mentions money
 vector<string> politics = { "congress","Congress","abortion","Abortion","president","President","immigration","Immigration", "election", "Election" }; // Keywords I use to identigy if a tweet mentions politics
 vector<string> food = {"food","Food", "yum","Yum", "#FoodFriday", "cook", "Cook"}; // Keywords I use to identigy if a tweet mentions food
 vector<string> vulgar = { "fuck", "Fuck", "phuck", "FUCK", "shit", "Shit", "SHIT", "bitch", "Bitch", "BITCH" ,"bitchez", "Bitchez" }; // Swear words 
